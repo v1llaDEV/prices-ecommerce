@@ -1,0 +1,156 @@
+openapi: 3.0.0
+info:
+  title: Price Service API
+  description: API to retrieve prices by date, product ID, and brand ID
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+paths:
+  /prices:
+    get:
+      summary: Retrieve price by date, product ID, and brand ID
+      parameters:
+        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/productId'
+        - $ref: '#/components/parameters/brandId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceDto'
+              example:
+                productId: 35455
+                brandId: 1
+                priceList: 4
+                startDate: '2020-06-15T16:00:00'
+                endDate: '2020-12-31T23:59:59'
+                price: 38.95
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/error400InvalidArgument'
+              example:
+                status: 400
+                error: Product identifier parameter cannot be null
+                path: /api/v1/prices
+                timestamp: 2020-06-16T21:00:00
+        405:
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/error405InvalidArgument'
+              example:
+                status: 405
+                error: Request method POST is not supported
+                path: /api/v1/prices
+                timestamp: 2020-06-16T21:00:00
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/error500ServerError'
+              example:
+                status: 500
+                error: Server error
+                path: /api/v1/prices
+                timestamp: 2020-06-16T21:00:00
+        504:
+          description: Server timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/error504Timeout'
+              example:
+                status: 504
+                error: Server timeout
+                path: /api/v1/prices
+                timestamp: 2020-06-16T21:00:00
+components:
+  schemas:
+    PriceDto:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          description: Product identifier
+        brandId:
+          type: integer
+          format: int64
+          description: Brand identifier
+        priceList:
+          type: integer
+          format: int64
+          description: Price list identifier
+        startDate:
+          type: string
+          format: YYYY-MM-DDTHH:MM:SS
+          description: Start date where a price applies
+        endDate:
+          type: string
+          format: YYYY-MM-DDTHH:MM:SS
+          description: End date where a price applies
+        price:
+          type: number
+          format: double
+          description: Product price
+    ExceptionResponseDto:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int64
+          description: Status code of the exception
+        error:
+          type: string
+          description: Error description of the exception
+        path:
+          type: string
+          description: resource where the request has been executed
+        timestamp:
+          type: string
+          format: YYYY-MM-DDTHH:MM:SS
+          description: Date where the request has been executed
+  parameters:
+    date:
+      in: query
+      name: date
+      schema:
+        type: string
+        format: date-time
+      required: true
+      description: Date for which the price is desired in the format YYYY-MM-DDTHH:MM:SS
+      example: 2020-06-15T10:00:00
+    productId:
+      in: query
+      name: productId
+      schema:
+        type: integer
+        format: int64
+      required: true
+      description: Unique identifier of the product
+      example: 35455
+    brandId:
+      in: query
+      name: brandId
+      schema:
+        type: integer
+        format: int64
+      required: true
+      description: Unique identifier of the brand
+      example: 1
+  responses:
+    error400InvalidArgument:
+      $ref: '#/components/schemas/ExceptionResponseDto'
+    error405InvalidArgument:
+      $ref: '#/components/schemas/ExceptionResponseDto'
+    error500ServerError:
+      $ref: '#/components/schemas/ExceptionResponseDto'
+    error504Timeout:
+      $ref: '#/components/schemas/ExceptionResponseDto'
