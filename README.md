@@ -59,16 +59,16 @@ arrancarlo.
 
  
   1. Abrimos un terminal y navegamos al directorio raíz de la aplicación donde se encuentra nuestro fichero DockerFile.
-  2. Generamos el artefacto de nuestro aplicación a través del comando: mvnw clean package
-  3. Creamos la imágen docker a partir del .jar generado con el comando: docker build -t prices-ecommerce .
-  4. Y por último creamos y desplegamos nuestro contenedor escribiendo: docker run -d -p 8080:8080 --name prices-ecommerce prices-ecommerce
+  2. Generamos el artefacto de nuestro aplicación a través del comando: <u>mvnw clean package</u>
+  3. Creamos la imágen docker a partir del .jar generado con el comando: <u>docker build -t prices-ecommerce .</u>
+  4. Y por último creamos y desplegamos nuestro contenedor escribiendo: <u>docker run -d -p 8080:8080 --name prices-ecommerce prices-ecommerce</u>
 
 ### A través del propio proyecto
 
 Si queremos arrancarlo sin ayuda de docker, simplemente haría falta:
 
 1. Abrir el proyecto con algún IDE como IntelliJ o Eclipse
-2. Navegar hacia la clase principal del proyecto: EcommerceApplication.java
+2. Navegar hacia la clase principal del proyecto: <u>EcommerceApplication.java</u>
 3. Clicar en el botón play que se situa a la altura de la clase
 
 
