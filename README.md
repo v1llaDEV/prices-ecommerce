@@ -94,7 +94,7 @@ Algunas peticiones para comprobar la gestión de excepciones:
 
 1. invalid date -> http://localhost:8080/api/v1/prices?date=2020-06-33T10:00:00&productId=35455&brandId=1
 2. productId parameter required -> http://localhost:8080/api/v1/prices?date=2020-06-14T10:00:00&brandId=1
-3. brandId parameter required -> http://localhost:8080/api/v1/prices?date=2020-06-14T10:00:00&productId=35455&brandId=1
+3. brandId parameter required -> http://localhost:8080/api/v1/prices?date=2020-06-14T10:00:00&productId=35455
 4. brandId parameter invalid value -> http://localhost:8080/api/v1/prices?date=2020-06-14T10:00:00&productId=35455&brandId=test
 5. price not found due to brandId -> http://localhost:8080/api/v1/prices?date=2020-06-14T10:00:00&productId=35455&brandId=5
 

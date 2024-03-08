@@ -253,7 +253,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/prices?date=2020-06-14T10:00:00&productId=35455&brandId=1",
+					"raw": "http://localhost:8080/api/v1/prices?date=2020-06-14T10:00:00&productId=35455",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -272,10 +272,6 @@
 						{
 							"key": "productId",
 							"value": "35455"
-						},
-						{
-							"key": "brandId",
-							"value": "1"
 						}
 					]
 				}
