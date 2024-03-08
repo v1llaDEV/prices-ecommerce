@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * The type Price dto.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

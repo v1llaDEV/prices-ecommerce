@@ -21,6 +21,9 @@ import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.equalTo;
 
+/**
+ * The type Price integration tests.
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class PriceIntegrationTests {
@@ -28,16 +31,31 @@ public class PriceIntegrationTests {
     @LocalServerPort
     private int port;
 
+    /**
+     * The Base url.
+     */
     String baseUrl = "http://localhost:";
 
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * Sets .
+     */
     @BeforeEach
     void setup() {
         baseUrl = baseUrl + port;
     }
 
+    /**
+     * Statement usestests.
+     *
+     * @param date          the date
+     * @param productId     the product id
+     * @param brandId       the brand id
+     * @param priceExpected the price expected
+     * @throws Exception the exception
+     */
     @ParameterizedTest(name = "Testing prices resource with: date {0}, productId {1}, brandId {2}, result expected: {3}")
     @MethodSource("providedTestUsecases")
     @DisplayName("Testing get prices by date, productId and brandId")
@@ -51,6 +69,11 @@ public class PriceIntegrationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.price", equalTo(priceExpected)));
     }
 
+    /**
+     * Invalid parameter exception test.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @DisplayName("Testing invalid parameter")
     void invalidParameterExceptionTest() throws Exception {
@@ -64,6 +87,11 @@ public class PriceIntegrationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.error", equalTo(expectedMessage)));
     }
 
+    /**
+     * Missing parameter exception test.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @DisplayName("Testing missing parameter")
     void missingParameterExceptionTest() throws Exception {

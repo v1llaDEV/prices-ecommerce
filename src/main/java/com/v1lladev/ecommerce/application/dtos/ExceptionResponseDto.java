@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * The type Exception response dto.
+ */
 @Data
 @Builder
 @NoArgsConstructor

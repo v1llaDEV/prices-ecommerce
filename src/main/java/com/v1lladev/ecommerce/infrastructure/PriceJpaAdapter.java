@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * The type Price jpa adapter.
+ */
 @Service
 @Transactional
 @RequiredArgsConstructor

@@ -10,9 +10,20 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * The interface Price repository.
+ */
 @Repository
 public interface PriceRepository extends JpaRepository<PriceEntity, Long> {
 
+    /**
+     * Gets price by date product id brand id.
+     *
+     * @param date      the date
+     * @param productId the product id
+     * @param brandId   the brand id
+     * @return the price by date product id brand id
+     */
     @Query(value = "SELECT TOP 1 ID, BRAND_ID, PRODUCT_ID, START_DATE, END_DATE, PRICE_LIST, PRICE, PRIORITY, CURR" +
             " FROM PRICES WHERE BRAND_ID=:brandId AND PRODUCT_ID=:productId AND :date BETWEEN START_DATE AND END_DATE" +
             " ORDER BY PRIORITY DESC", nativeQuery = true)

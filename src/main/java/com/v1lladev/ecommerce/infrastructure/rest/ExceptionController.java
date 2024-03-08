@@ -20,42 +20,97 @@ import java.time.LocalDateTime;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
+/**
+ * The type Exception controller.
+ */
 @Slf4j
 @ControllerAdvice
 public class ExceptionController {
 
+    /**
+     * The constant EMPTY_STRING.
+     */
     public final static String EMPTY_STRING = "";
 
+    /**
+     * Handle custom invalid parameter exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
     @ExceptionHandler(PriceNotFoundException.class)
     public ResponseEntity<ExceptionResponseDto> handleCustomInvalidParameterException(final PriceNotFoundException exception, final HttpServletRequest request) {
         return handleExceptionResponseDto(exception, request, HttpStatus.NOT_FOUND.value(), EMPTY_STRING);
     }
 
+    /**
+     * Handle custom invalid parameter exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
     @ExceptionHandler(CustomInvalidParameterException.class)
     public ResponseEntity<ExceptionResponseDto> handleCustomInvalidParameterException(final CustomInvalidParameterException exception, final HttpServletRequest request) {
         return handleExceptionResponseDto(exception, request, HttpStatus.BAD_REQUEST.value(), EMPTY_STRING);
     }
 
+    /**
+     * Handle missing servlet request parameter exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<ExceptionResponseDto> handleMissingServletRequestParameterException(final MissingServletRequestParameterException exception, final HttpServletRequest request) {
         return handleExceptionResponseDto(exception, request, HttpStatus.BAD_REQUEST.value(), EMPTY_STRING);
     }
 
+    /**
+     * Http request method not supported exception exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<ExceptionResponseDto> HttpRequestMethodNotSupportedExceptionException(final HttpRequestMethodNotSupportedException exception, final HttpServletRequest request) {
         return handleExceptionResponseDto(exception, request, HttpStatus.METHOD_NOT_ALLOWED.value(), EMPTY_STRING);
     }
 
+    /**
+     * Handle no resource found exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
     @ExceptionHandler(NoResourceFoundException.class)
     public ResponseEntity<ExceptionResponseDto> handleNoResourceFoundException(final NoResourceFoundException exception, final HttpServletRequest request) {
         return handleExceptionResponseDto(exception, request, HttpStatus.NOT_FOUND.value(), EMPTY_STRING);
     }
 
+    /**
+     * Handle method argument type mismatch exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ExceptionResponseDto> handleMethodArgumentTypeMismatchException(final MethodArgumentTypeMismatchException exception, final HttpServletRequest request) {
         return handleExceptionResponseDto(exception, request, BAD_REQUEST.value(), String.format(PriceConstants.VALIDATION_PARAMETER_ERROR, exception.getPropertyName(), exception.getValue()));
     }
 
+    /**
+     * Handle general exception response entity.
+     *
+     * @param exception the exception
+     * @param request   the request
+     * @return the response entity
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionResponseDto> handleGeneralException(final Exception exception, final HttpServletRequest request) {
         return handleExceptionResponseDto(exception, request, INTERNAL_SERVER_ERROR.value(), "");

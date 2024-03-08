@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
+/**
+ * The type Price rest controller.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -21,6 +24,14 @@ public class PriceRestController {
 
     private final PriceUsecase priceUsecase;
 
+    /**
+     * Gets price by date product id brand id.
+     *
+     * @param date      the date
+     * @param productId the product id
+     * @param brandId   the brand id
+     * @return the price by date product id brand id
+     */
     @GetMapping
     public ResponseEntity<PriceDto> getPriceByDateProductIdBrandId(@RequestParam(required = true) LocalDateTime date,
                                                                    @RequestParam(required = true) Long productId,
